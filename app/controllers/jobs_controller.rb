@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  skip_before_action :authenticate, only: [:index, :open]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
@@ -61,6 +62,7 @@ class JobsController < ApplicationController
     end
   end
 
+  before_action :admin_only
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
@@ -70,5 +72,11 @@ class JobsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:name, :overview, :type_id, :user_id, :filled)
+    end
+    
+    def admin_only
+      if !current_user.admin?
+        redirect_to root_path
+      end
     end
 end
