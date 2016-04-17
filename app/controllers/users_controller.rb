@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users
   # GET /users.json
-  before_action :admin_only
+  #before_action :admin_only
   def index
     @users = User.all
   end
@@ -90,5 +90,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :role_id)
     end
     
+    def admin_only
+      if !current_user.admin?
+        redirect_to root_path
+      end
+    end
 
 end

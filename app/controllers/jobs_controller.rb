@@ -66,7 +66,6 @@ class JobsController < ApplicationController
     @jobs = Job.open
   end
 
-  before_action :admin_only
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
@@ -78,9 +77,4 @@ class JobsController < ApplicationController
       params.require(:job).permit(:name, :overview, :type_id, :current_user.id, :filled)
     end
     
-    def admin_only
-      if !current_user.admin?
-        redirect_to root_path
-      end
-    end
 end
