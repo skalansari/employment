@@ -71,4 +71,10 @@ class TypesController < ApplicationController
     def type_params
       params.require(:type).permit(:name)
     end
+    
+    def admin_only
+      if !current_user.admin?
+        redirect_to root_path
+      end
+    end
 end

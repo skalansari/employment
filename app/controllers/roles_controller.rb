@@ -71,4 +71,10 @@ class RolesController < ApplicationController
     def role_params
       params.require(:role).permit(:name)
     end
+    
+    def admin_only
+      if !current_user.admin?
+        redirect_to root_path
+      end
+    end
 end
