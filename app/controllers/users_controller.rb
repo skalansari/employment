@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate, only: [:new, :create]
+  #skip_before_action :authenticate, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  #before_action :admin_only
+  #before_action :admin_only, only: [:index, :make_admin]
 
   # GET /users
   # GET /users.json
@@ -61,8 +63,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  before_action :admin_only, only: [:index, :make_admin]
   
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -76,19 +76,4 @@ class UsersController < ApplicationController
     end
     
 
-    def make_admin
-      @user.toggle!(:admin)
-      if @user.save
-        redirect_to users_path, notice: 'User was successfully updated.'
-      else
-        flash[:alert]= 'Error updating user'
-        redirect_to users_path
-      end
-    end
-    
-    def admin_only
-      if !current_user.admin?
-        redirect_to root_path
-      end
-    end
 end

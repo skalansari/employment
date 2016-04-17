@@ -5,7 +5,7 @@ class CreateJobs < ActiveRecord::Migration
       t.text :overview
       t.integer :type_id
       t.integer :user_id
-      t.boolean :filled
+      t.boolean :filled, default: false
 
       t.timestamps null: false
     end

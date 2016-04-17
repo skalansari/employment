@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  skip_before_action :authenticate, only: [:index, :open]
+  #skip_before_action :authenticate, only: [:index, :open]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
@@ -26,7 +26,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
-
+    
     respond_to do |format|
       if @job.save
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
@@ -61,6 +61,10 @@ class JobsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def open
+    @jobs = Job.open
+  end
 
   before_action :admin_only
   private
@@ -71,7 +75,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:name, :overview, :type_id, :user_id, :filled)
+      params.require(:job).permit(:name, :overview, :type_id, :current_user.id, :filled)
     end
     
     def admin_only

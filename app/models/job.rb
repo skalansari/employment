@@ -4,5 +4,5 @@ class Job < ActiveRecord::Base
   
   validates :name, :overview, :type_id, :user_id, presence: true
   
-  scope :filled, -> {where('designer = ?', "false")}
+  scope :open, -> {where('filled = ?', "false")}
 end
