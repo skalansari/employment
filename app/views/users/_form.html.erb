@@ -5,8 +5,7 @@
     <%= f.input :name %>
     <%= f.input :email %>
     <%= f.input :password %>
-    <%= f.input :role_id %>
-    <%= f.input :admin %>
+    <%= f.association :role, as: :radio_buttons %>
   </div>
 
   <div class="form-actions">

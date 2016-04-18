@@ -4,8 +4,7 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :overview %>
-    <%= f.input :type_id %>
-    <%= f.input :user_id %>
+    <%= f.association :type, as: :radio_buttons %>
     <%= f.input :filled %>
   </div>
 

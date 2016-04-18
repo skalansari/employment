@@ -15,7 +15,12 @@ Rails.application.routes.draw do
    delete 'visitors/index' => 'sessions#destroy', as: :logout
 
    get 'users/new' => 'users#new', as: :signup
-
+   
+   post 'users/new' => 'sessions#new'
+   
+   get 'users' => 'users#show'
+   
+   
    resources :users do
      get :make_admin, on: :member
    end
