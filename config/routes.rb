@@ -16,9 +16,7 @@ Rails.application.routes.draw do
 
    get 'users/new' => 'users#new', as: :signup
    
-   post 'users/new' => 'sessions#new'
-   
-   get 'users' => 'users#show'
+   post 'users/new'  => 'sessions#create'
    
    
    resources :users do

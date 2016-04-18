@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20160414072735) do
     t.text     "overview"
     t.integer  "type_id"
     t.integer  "user_id"
-    t.boolean  "filled"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "filled",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "roles", force: :cascade do |t|
